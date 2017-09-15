@@ -12,5 +12,3 @@ int smart_control_switch = 7; //Gets switch input to use or don't use the smart 
 //This allows the optimized checking if the motor should be on or off. 
 //This makes the reset and other checking if false not work. 
 //The motor will be ON or OFF based off of the state of the sensor which we are checking for.
-
-// TEST! from jack
