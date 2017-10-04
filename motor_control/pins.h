@@ -1,6 +1,6 @@
 /*These are the pins which the arduino uses. */
 
-int sensor = 5; //Sensor Digital Pin (INPUT)
+#define sensor 5 //Sensor Digital Pin (INPUT)
 int motor = 10; //Motor Digital Pin (OUTPUT)
 int motor_speed_pin = 3; //Pin to set the PWM signal to control the speed of the motor. (OUTPUT)
 int reset = 12; //Reset Digital Pin (INPUT)
