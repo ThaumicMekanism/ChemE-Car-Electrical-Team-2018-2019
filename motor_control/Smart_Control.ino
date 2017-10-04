@@ -14,12 +14,13 @@ void smartfn() {
       checked_loops++;
     }
 
+    
     //Count if button is on or off.
     flickering_button_loops++;
     if (digitalRead(reset) == HIGH) {
       flickering_button_state++;
     }
-    Serial.println(allow_button);
+    //Serial.println(allow_button);
     //Checks to see if the button is spamming.
     /*
     if (abs(currentMillis - flickering_button_previousMillis) >= flickering_button_fix_check_interval) {
@@ -53,9 +54,11 @@ void smartfn() {
       loops = 0;
       checked_loops = 0;
     }
-    Serial.println("Loops: ");
-    Serial.println(loops);
-    Serial.println("Checked Loops: ");
-    Serial.println(checked_loops);
+    if(debug_check) {
+      Serial.println("Loops: ");
+      Serial.println(loops);
+      Serial.println("Checked Loops: ");
+      Serial.println(checked_loops);
+    }
 }
 

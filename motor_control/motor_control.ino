@@ -82,7 +82,7 @@ void setup() {
       digitalWrite(board_ready, HIGH);
     }
   }
-} 
+}
 
 void loop() {
   //Gets the current milliseconds time.
@@ -105,12 +105,10 @@ void loop() {
   if(!debug_state){
     Serial.print("Sensor state: ");
     Serial.println(state);
-    //Serial.println(state);
   }
   if(!debug_on){
     Serial.print("Motor: ");
     Serial.println(on);
-    //Serial.println(on);
   }
   
   //END DEBUG\\
