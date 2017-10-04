@@ -37,13 +37,15 @@ long bBuffer = 0;
 void setup() {
   //PinMode Setup\\
 
-  pinMode(motor_speed_pin, OUTPUT);
-  pinMode(sensor, INPUT);
+  //pinMode(motor_speed_pin, OUTPUT);
+  pinMode(digitalSensor, INPUT);
+  pinMode(analogSensor, INPUT);
   pinMode(motor, OUTPUT);
   pinMode(reset, INPUT);
   pinMode(board_ready, OUTPUT);
   pinMode(smart_control_switch, INPUT);
-  pinMode(decrease_buffer_switch, INPUT);
+  //pinMode(decrease_buffer_switch, INPUT);
+  pinMode(adLightSwitch, INPUT);
 
   //END PinMode Setup\\
 
@@ -62,7 +64,7 @@ void setup() {
   if(motor_speed > 255){
     motor_speed = 255;
   }
-  analogWrite(motor_speed_pin, motor_speed);
+  //analogWrite(motor_speed_pin, motor_speed);
   
   //Debug Channel Init (Initiates regardless of if it is called or not later.)
   Serial.begin(9600);
@@ -71,6 +73,15 @@ void setup() {
   if(debug_board_ready){
     digitalWrite(board_ready, HIGH);
   }
+
+  if(smart_control) {
+    for (int i = 0; i < 10; i++) {
+      delay(100);
+      digitalWrite(board_ready, LOW);
+      delay(100);
+      digitalWrite(board_ready, HIGH);
+    }
+  }
 } 
 
 void loop() {
@@ -78,14 +89,16 @@ void loop() {
   currentMillis = millis();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
-  state = !digitalRead(sensor);
+  state = !digitalRead(digitalSensor);
 
   //Gets the current state of the decrease buffer switch.
+  /*
   if (digitalRead(decrease_buffer_switch) == HIGH) {
     bBuffer = decreasedButtonBuffer;
   } else {
     bBuffer = buttonBuffer;
   }
+  */
 
   //DEBUG\\
   

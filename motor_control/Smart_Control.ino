@@ -21,6 +21,7 @@ void smartfn() {
     }
     Serial.println(allow_button);
     //Checks to see if the button is spamming.
+    /*
     if (abs(currentMillis - flickering_button_previousMillis) >= flickering_button_fix_check_interval) {
        if (flickering_button_fix == true and allow_button == true and flickering_button_state*2 > flickering_button_loops) {
           flickering_button_timeout_previousMillis = currentMillis;
@@ -30,9 +31,11 @@ void smartfn() {
        flickering_button_loops = 0;
        flickering_button_state = 0;
     }
+    
     if (abs(currentMillis - flickering_button_timeout_previousMillis) >= flickering_button_fix_timeout_time and allow_button == false) {
       allow_button = true;
     }
+    */
   
     //Checks to see if the the loop has looped for number of loops specified.
     if(abs(currentMillis - previousMillis) >= interval){
