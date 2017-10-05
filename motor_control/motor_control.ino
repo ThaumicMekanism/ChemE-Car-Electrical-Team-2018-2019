@@ -18,13 +18,8 @@ int checked_loops = 0;
 int state = 0;
 unsigned long previousMillis = 0;
 unsigned long currentMillis = 0;
-unsigned long flickering_button_previousMillis = 0;
-unsigned long flickering_button_timeout_previousMillis = 0;
-int flickering_button_state = 0;
-int flickering_button_loops = 0;
 bool smart_control = true;
 bool allow_button = true;
-unsigned long buttonMilli = 0;
 bool dec_bBuffer = false;
 long bBuffer = 0;
 
