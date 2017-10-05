@@ -1,6 +1,10 @@
 /////////////////////////////////////////////////////////
 //Created by Stephan K for the ChemE Car Team Fall 2016//
 /////////////////////////////////////////////////////////
+/*/////// \\\\\\\\\ 
+|||||Includes||||||
+\\\\\\\\\ ///////*/
+#include <EEPROM.h> //This includes the functions which eeprom uses so that we can store data even when the board looses power.
 
 /*/////// \\\\\\\\\ 
 |||||Variables|||||
@@ -17,7 +21,7 @@ int loops = 0;
 int checked_loops = 0;
 int state = 0;
 unsigned long previousMillis = 0;
-unsigned long currentMillis = 0;
+unsigned long time = 0;
 bool smart_control = true;
 bool allow_button = true;
 bool dec_bBuffer = false;
@@ -81,7 +85,7 @@ void setup() {
 
 void loop() {
   //Gets the current milliseconds time.
-  currentMillis = millis();
+  currentTime = millis();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
   state = !digitalRead(digitalSensor);

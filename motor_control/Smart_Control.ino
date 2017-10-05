@@ -14,7 +14,7 @@ void smartfn() {
     }
 
     //Checks to see if the the loop has looped for number of loops specified.
-    if(abs(currentMillis - previousMillis) >= interval){
+    if(abs(currentTime - previousMillis) >= interval){
       //Debug that prints everytime this loop is entered (whenever it compares the loops vs checked_loops values.
       if(debug_check){
         Serial.write("Checked!");
@@ -25,7 +25,7 @@ void smartfn() {
         on = false;
       }
       //Reset the loops checks plus updating the timing variables.
-      previousMillis = currentMillis;
+      previousMillis = currentTime;
       loops = 0;
       checked_loops = 0;
     }
