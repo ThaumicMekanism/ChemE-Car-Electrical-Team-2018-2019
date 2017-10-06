@@ -1,6 +1,6 @@
 void smartfn() {
   //Resets light
-    if(digitalRead(reset) == HIGH and allow_button == true){
+    if(readBtn(reset, LOW) == HIGH and allow_button == true){
       //Turns motor back on and resets 'on' back to true (running)
       digitalWrite(motor, HIGH);
       on = true;

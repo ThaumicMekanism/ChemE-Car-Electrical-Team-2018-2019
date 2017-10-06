@@ -29,6 +29,7 @@ bool allow_button = true;
 bool prevResetState = false;
 bool smart_switch = false;
 bool smart_switch_prev = false;
+unsigned long button_timeout = 0;
 BlinkLed* blinkled;
 
 //END Other Variables
@@ -83,25 +84,21 @@ void setup() {
   }
 
   //Writes to the console the results of the previous time it was measuring.
-  writeTimer();
+  //writeTimer();
+  parserinit();
   
   //Causes the ready light to flicker if smart control is on.
   if(smart_control) {
-    /*
-    for (int i = 0; i < 10; i++) {
-      delay(100);
-      digitalWrite(board_ready, LOW);
-      delay(100);
-      digitalWrite(board_ready, HIGH);
-    }
-    */
     blinkled->add(board_ready, 100, 10, 0);
   } else {
     timerInit();
   }
+
 }
 
 void loop() {
+  parser();
+  
   //Gets the current milliseconds time.
   currentTime = millis();
 
@@ -109,6 +106,7 @@ void loop() {
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
   state = !digitalRead(digitalSensor);
+  
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
 
@@ -148,6 +146,15 @@ void loop() {
   //If the variable on is false, trun the motor off. (!false = true)
   if(!on){
     digitalWrite(motor, LOW);
+  }
+}
+
+bool readBtn(int pin, bool prev) {
+  if (currentTime - button_timeout > 100) {
+    button_timeout = currentTime;
+    return digitalRead(reset);
+  } else {
+    return prev;
   }
 }
 
