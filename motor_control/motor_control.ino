@@ -105,7 +105,7 @@ void loop() {
   blinkled->tick(currentTime);
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
-  state = !digitalRead(digitalSensor);
+  state = lightSensor(false);
   
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
