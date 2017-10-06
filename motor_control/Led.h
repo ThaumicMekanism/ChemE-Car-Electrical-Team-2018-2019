@@ -8,14 +8,16 @@ class Led {
     int numBlinks;
     long offset;
     unsigned long prevTime;
-    Led(int _pin, unsigned long _duration,int _numBlinks, long _offset);
+    bool state;
+    Led(int _pin, bool state, unsigned long _duration, int _numBlinks, long _offset);
 };
 
-Led::Led(int _pin, unsigned long _duration,int _numBlinks, long _offset) {
+Led::Led(int _pin, bool _state, unsigned long _duration, int _numBlinks, long _offset) {
     pin = _pin;
     duration = _duration;
     numBlinks = _numBlinks;
     offset = _offset;
+    state = _state;
     prevTime = millis();
 }
 

@@ -19,11 +19,17 @@ class BlinkLed
         if (leds[_pin] == NULL) {
           numLeds++;
         }
-        leds[_pin] = new Led(_pin, _duration, _numBlinks * 2, _offset);
-      //Serial.print("Added led on pin: ");
-      //Serial.println(_pin);
+        leds[_pin] = new Led(_pin, getLedState(_pin), _duration, _numBlinks * 2, _offset);
+        //Serial.print("Added led on pin: ");
+        //Serial.println(_pin);
       }
-      
+
+    }
+    void setLedState(int pin, bool state) {
+      digitalWrite(pin, state);
+    }
+    bool getLedState(int pin) {
+      return digitalRead(pin);
     }
     void tick(unsigned long t) {
       for (int i = 0; i < numLedsTot && numLeds > 0; i++) {
@@ -31,7 +37,8 @@ class BlinkLed
         if (l != NULL) {
           if (l->numBlinks == -2 || l->numBlinks > 0) {
             if (t - l->prevTime > l->duration) {
-              digitalWrite(l->pin, !digitalRead(l->pin));
+              //digitalWrite(l->pin, !digitalRead(l->pin));
+              setLedState(l->pin, !getLedState(l->pin));
               l->prevTime = t;
               if (l->numBlinks > 0) {
                 l->numBlinks--;
@@ -52,7 +59,7 @@ class BlinkLed
           numLeds--;
           leds[pin] = NULL;
           digitalWrite(pin, state);
-          
+
         }
       }
     }
@@ -64,6 +71,7 @@ BlinkLed::BlinkLed() {
   for (int i = 0; i < numLedsTot; i++) {
     leds[i] = NULL;
   }
+  numLeds = 0;
 }
 
 
