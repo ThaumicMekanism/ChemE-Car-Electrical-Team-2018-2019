@@ -5,6 +5,8 @@
 |||||Includes||||||
 \\\\\\\\\ ///////*/
 #include <EEPROM.h> //This includes the functions which eeprom uses so that we can store data even when the board looses power.
+#include "eepromHelper.h"
+#include "BlinkLed.h"
 
 /*/////// \\\\\\\\\ 
 |||||Variables|||||
@@ -21,11 +23,13 @@ int loops = 0;
 int checked_loops = 0;
 int state = 0;
 unsigned long previousMillis = 0;
-unsigned long time = 0;
+unsigned long currentTime = 0;
 bool smart_control = true;
 bool allow_button = true;
-bool dec_bBuffer = false;
-long bBuffer = 0;
+bool prevResetState = false;
+bool smart_switch = false;
+bool smart_switch_prev = false;
+BlinkLed* blinkled;
 
 //END Other Variables
 
@@ -46,12 +50,15 @@ void setup() {
   //pinMode(decrease_buffer_switch, INPUT);
   pinMode(adLightSwitch, INPUT);
 
+
   //END PinMode Setup\\
 
   //Turns the motor on if the variable on is true.
   if(on == true){
     digitalWrite(motor, HIGH);
   }
+
+  
 
   //Switches to change settings
   if(allow_switches == true){
@@ -68,44 +75,50 @@ void setup() {
   //Debug Channel Init (Initiates regardless of if it is called or not later.)
   Serial.begin(9600);
 
+  blinkled = new BlinkLed();
+
   //Lights led since the board should be ready and is now looping.
   if(debug_board_ready){
     digitalWrite(board_ready, HIGH);
   }
 
+  //Writes to the console the results of the previous time it was measuring.
+  writeTimer();
+  
+  //Causes the ready light to flicker if smart control is on.
   if(smart_control) {
+    /*
     for (int i = 0; i < 10; i++) {
       delay(100);
       digitalWrite(board_ready, LOW);
       delay(100);
       digitalWrite(board_ready, HIGH);
     }
+    */
+    blinkled->add(board_ready, 100, 10, 0);
+  } else {
+    timerInit();
   }
 }
 
 void loop() {
   //Gets the current milliseconds time.
   currentTime = millis();
+
+  blinkled->tick(currentTime);
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
   state = !digitalRead(digitalSensor);
-
-  //Gets the current state of the decrease buffer switch.
-  /*
-  if (digitalRead(decrease_buffer_switch) == HIGH) {
-    bBuffer = decreasedButtonBuffer;
-  } else {
-    bBuffer = buttonBuffer;
-  }
-  */
+  smart_switch_prev = smart_switch;
+  smart_switch = digitalRead(smart_control_switch);
 
   //DEBUG\\
   
-  if(!debug_state){
+  if(debug_state){
     Serial.print("Sensor state: ");
     Serial.println(state);
   }
-  if(!debug_on){
+  if(debug_on){
     Serial.print("Motor: ");
     Serial.println(on);
   }
@@ -115,11 +128,19 @@ void loop() {
   if(smart_control){
     smartfn();
   }else{
+    if (smart_switch_prev != smart_switch) {
+      if (smart_switch) {
+        blinkled->add(board_ready, 250, -1, 0);
+      } else {
+        blinkled->rem(board_ready, HIGH);
+      }
+    }
     if(state == check){
       on = true;
     }else{
       on = false;
     }
+    checkTimer();
     if(on){
       digitalWrite(motor, HIGH);
     }
@@ -129,3 +150,4 @@ void loop() {
     digitalWrite(motor, LOW);
   }
 }
+
