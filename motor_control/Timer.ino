@@ -8,6 +8,10 @@
  * 
  * IMPORTANT: We don't need to reinclude EEPROM since the main file already has that included.
  */
+#define numMeasurements 0
+#define startAddressAddress 1
+#define startAddress 2
+
 bool measuring = false;
 unsigned long startingMeasurement = 0;
 
@@ -19,7 +23,7 @@ bool timerInit() {
 bool writeTimer() {
   Serial.println("***Timing results from last time***");
   Serial.print("Number of entries: ");
-  int eep0 = EEPROM.read(0);
+  int eep0 = EEPROM.read(numMeasurements);
   Serial.println(eep0);
   //Will make it so it outputs multiple eeprom results (as many as addr 0 says).
   for (int i = 0; i < eep0; i++) {
@@ -34,8 +38,8 @@ bool writeTimer() {
 
 bool clearTimer() {
   Serial.println("Clearing timer...");
-  EEPROM.write(0, 0);
-  EEPROM.write(1, 2);
+  EEPROM.write(numMeasurements, 0);
+  EEPROM.write(startAddressAddress, startAddress);
   Serial.println("Cleared!\n");
 }
 bool resetState = false;
@@ -60,11 +64,11 @@ bool checkTimer() {
 
 bool saveTimer() {
   //FUTURE IDEA: Make it so it can remember multiple values! Will be using address 0,1 to 
-  int eep1 = EEPROM.read(1);
+  int eep1 = EEPROM.read(startAddressAddress);
   EEPROMWritelong(eep1, currentTime - startingMeasurement);
-  EEPROM.write(0, EEPROM.read(0) + 1);
+  EEPROM.write(numMeasurements, EEPROM.read(0) + 1);
   if (eep1 + 4 <= 1023) {
-    EEPROM.write(1, eep1 + 4);
+    EEPROM.write(startAddressAddress, eep1 + 4);
   }
 }
 
