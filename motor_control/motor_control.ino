@@ -7,6 +7,7 @@
 #include <EEPROM.h> //This includes the functions which eeprom uses so that we can store data even when the board looses power.
 #include "eepromHelper.h"
 #include "BlinkLed.h"
+#include "Voltmeter.h"
 
 /*/////// \\\\\\\\\ 
 |||||Variables|||||
@@ -31,6 +32,7 @@ bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
 BlinkLed* blinkled;
+Voltmeter* voltmeter;
 
 //END Other Variables
 
@@ -77,6 +79,7 @@ void setup() {
   Serial.begin(9600);
 
   blinkled = new BlinkLed();
+  voltmeter = new Voltmeter(A5, 100000.0, 10000.0, 5.0); // Using a 100k and 10k resistor to do measurements.
 
   //Lights led since the board should be ready and is now looping.
   if(debug_board_ready){
