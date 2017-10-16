@@ -9,6 +9,7 @@
  *      |         | ---- -  |=======|
  *      -----------   Shared Ground
  * 
+ * NOTICE: Will not be using this any more since cannot get accurate values. Will keep it in though because it is cool.
  */
 
 #ifndef Voltmeter_h
@@ -19,7 +20,7 @@ class Voltmeter {
   public:
     Voltmeter(int _pin, float _R1, float _R2, float _fixedDefVolt);
     int readPin(int p) {
-      return digitalRead(p);
+      return analogRead(p);
     }
     float getVoltage(void) { //Return vin!
        // read the value at analog input
