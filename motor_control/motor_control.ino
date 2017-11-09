@@ -6,7 +6,7 @@
 \\\\\\\\\ ///////*/
 #include <EEPROM.h> //This includes the functions which eeprom uses so that we can store data even when the board looses power.
 #include "BlinkLed.h"
-#include "Voltmeter.h"
+#include "Logger.h"
 
 /*/////// \\\\\\\\\ 
 |||||Variables|||||
@@ -31,6 +31,7 @@ bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
 BlinkLed* blinkled;
+Logger* logger;
 
 //END Other Variables
 
@@ -77,6 +78,8 @@ void setup() {
   Serial.begin(9600);
 
   blinkled = new BlinkLed();
+  logger = new Logger();
+  
   pinMode(A5, INPUT);
   pinMode(A4, INPUT);
 
