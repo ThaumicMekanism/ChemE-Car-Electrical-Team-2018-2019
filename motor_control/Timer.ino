@@ -14,6 +14,7 @@
 
 bool measuring = false;
 unsigned long startingMeasurement = 0;
+bool prevResetState = false;
 
 bool timerInit() {
 

@@ -26,7 +26,6 @@ unsigned long previousMillis = 0;
 unsigned long currentTime = 0;
 bool smart_control = true;
 bool allow_button = true;
-bool prevResetState = false;
 bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
@@ -75,7 +74,7 @@ void setup() {
   //analogWrite(motor_speed_pin, motor_speed);
   
   //Debug Channel Init (Initiates regardless of if it is called or not later.)
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   blinkled = new BlinkLed();
   logger = new Logger();
@@ -99,12 +98,16 @@ void setup() {
 }
 
 void loop() {
+  //unsigned int time = 0;
+  //time = micros();
   parser();
   
   //Gets the current milliseconds time.
   currentTime = millis();
 
+  //Some classes 'tick' where they update values with all fns running instead of having their own for loops and halting the code.
   blinkled->tick(currentTime);
+  logger->tick(currentTime);
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
   state = lightSensor(true);
@@ -149,6 +152,8 @@ void loop() {
   if(!on){
     digitalWrite(motor, LOW);
   }
+  //time = micros() - time;
+  //Serial.println(time, DEC);
 }
 
 bool readBtn(int pin, bool prev) {
