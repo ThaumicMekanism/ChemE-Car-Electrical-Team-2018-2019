@@ -30,6 +30,7 @@ bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
 bool resetState = false;
+bool controlledVoltage = false;
 BlinkLed* blinkled;
 Logger* logger;
 
@@ -147,7 +148,7 @@ void loop() {
       on = false;
     }
     //checkTimer();
-    if(on){
+    if(on && !controlledVoltage){
       digitalWrite(motor, HIGH);
     }
   }
