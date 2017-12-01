@@ -23,7 +23,7 @@ class Logger {
 };
 Logger::Logger() {
     ina219.begin();
-    SD.begin();
+    SD.begin(10);
     while (SD.exists(fileName())) {
         if (basenameInt + 1 < basenameInt) {
             exit(1);
