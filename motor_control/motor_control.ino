@@ -43,7 +43,6 @@ Logger* logger;
 void setup() {
   //PinMode Setup\\
 
-  //pinMode(motor_speed_pin, OUTPUT);
   pinMode(digitalSensor, INPUT);
   pinMode(analogSensor, INPUT);
   pinMode(motor, OUTPUT);
@@ -67,13 +66,6 @@ void setup() {
   if(allow_switches == true){
     smart_control = digitalRead(smart_control_switch);
   }
-
-  //Controls the motors speed.
-  motor_speed = (abs(motor_speed) / 100) * 255;
-  if(motor_speed > 255){
-    motor_speed = 255;
-  }
-  //analogWrite(motor_speed_pin, motor_speed);
   
   //Debug Channel Init (Initiates regardless of if it is called or not later.)
   Serial.begin(115200);

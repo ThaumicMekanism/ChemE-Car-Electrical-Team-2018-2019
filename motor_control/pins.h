@@ -5,7 +5,6 @@
 #define digitalSensor 5 //Sensor Digital Pin (INPUT)
 #define analogSensor A0 //Sensor Analog Pin (INPUT)
 #define motor 6 //Motor Digital Pin (OUTPUT)
-//#define motor_speed_pin 3 //Pin to set the PWM signal to control the speed of the motor. (OUTPUT)
 #define reset 2 //Reset Digital Pin (INPUT)
 #define board_ready 7 //Activates when the board is ready. (OUTPUT) (Meant for a LED)
 //int check_state_switch = 9; //Determins whether to check for high or low state On/Off. (INPUT) (ONLY CHECKED WHEN: board first starts up)
