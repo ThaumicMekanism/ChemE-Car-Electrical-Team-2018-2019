@@ -11,13 +11,16 @@ class Logger {
     public:
         void tick(unsigned long t);
         void measure();
-        bool checkTimer(unsigned long curT, bool isactiveState, bool resetState, bool onState);
+        void checkTimer(unsigned long curT, bool resetState, bool onState);
         void newFile();
         void nextName();
         String fileName();
         Logger();
         unsigned long measureThreshold = 100; // In milliseconds
     private:
+        bool *onState;
+        bool *isActiveState;
+        bool *resetState;
         Adafruit_INA219 ina219;
         File currentFile;
         bool prevResetState = false;
@@ -27,7 +30,10 @@ class Logger {
         unsigned int curnameInt = 0;
         unsigned long prevT = 0;
 };
-Logger::Logger() {
+Logger::Logger(bool *_onState, bool *_isActiveState, bool *_resetState) {
+    onState = _onState;
+    isActiveState = _isActiveState;
+    resetState = _resetState;
     ina219.begin();
     SD.begin(chipselect);
     while (SD.exists(fileName())) {
@@ -38,9 +44,12 @@ Logger::Logger() {
     }
     newFile();
 }
+
 void Logger::tick(unsigned long t) {
+    checkTimer(t, );
     
 }
+
 void Logger::measure(){
     float shuntvoltage = ina219.getShuntVoltage_mV();
     float busvoltage = ina219.getBusVoltage_V();
@@ -55,7 +64,7 @@ void Logger::measure(){
     currentFile.println(loadvoltage);
 }
 
-bool Logger::checkTimer(unsigned long curT, bool isactiveState, bool resetState, bool onState) {
+void Logger::checkTimer(unsigned long curT, bool resetState, bool onState) {
   if (isactiveState) {
     if (measuring && curT - prevT > measureThreshold) {
       measure();
@@ -98,7 +107,7 @@ String Logger::fileName() {
     String s = "ChemEdata-" + basenameInt;
     s += "-";
     s += curnameInt;
-    s += ".svg";
+    s += ".csv";
     return s;
 }
 #endif
