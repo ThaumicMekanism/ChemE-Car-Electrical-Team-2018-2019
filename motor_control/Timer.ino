@@ -39,7 +39,7 @@ bool writeTimer() {
 }
 
 bool clearTimer() {
-  Serial.println("Clearing timer...");
+  Serial.print("Clearing timer...");
   EEPROM.write(numMeasurements, 0);
   EEPROM.write(currentAddressAddress, startAddress);
   Serial.println("Cleared!\n");

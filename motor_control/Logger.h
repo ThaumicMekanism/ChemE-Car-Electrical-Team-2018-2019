@@ -20,6 +20,7 @@ class Logger {
         File currentFile;
         unsigned int basenameInt = 0;
         unsigned int curnameInt = 0;
+        unsigned long startTime = 0;
 };
 Logger::Logger() {
     ina219.begin();
@@ -47,8 +48,8 @@ void Logger::measure(){
     currentFile.print(current_mA);
     currentFile.print(F(","));
     currentFile.println(loadvoltage);
-    
 }
+
 void Logger::newFile() {
     if (currentFile) {
         currentFile.close();

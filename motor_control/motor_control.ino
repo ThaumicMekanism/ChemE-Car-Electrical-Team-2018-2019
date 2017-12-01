@@ -17,7 +17,7 @@
 #include "debug.h"
 
 //Other Variables\\
-/* These are variables which should not be changed. These are required for the program to opporated. */
+/* These are variables which should not be changed. These are required for the program to run. */
 
 int loops = 0;
 int checked_loops = 0;
@@ -79,9 +79,6 @@ void setup() {
 
   blinkled = new BlinkLed();
   logger = new Logger();
-  
-  pinMode(A5, INPUT);
-  pinMode(A4, INPUT);
 
   //Lights led since the board should be ready and is now looping.
   if(debug_board_ready){
