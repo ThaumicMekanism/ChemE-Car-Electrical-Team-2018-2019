@@ -29,6 +29,7 @@ bool allow_button = true;
 bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
+bool resetState = false;
 BlinkLed* blinkled;
 Logger* logger;
 
@@ -77,7 +78,7 @@ void setup() {
   Serial.begin(115200);
 
   blinkled = new BlinkLed();
-  logger = new Logger();
+  logger = new Logger(&on, &smart_switch, &resetState, &state);
 
   //Lights led since the board should be ready and is now looping.
   if(debug_board_ready){
@@ -92,7 +93,7 @@ void setup() {
   if(smart_control) {
     blinkled->add(board_ready, 100, 10, 0);
   } else {
-    timerInit();
+    //timerInit();
   }
   
 }
@@ -110,10 +111,12 @@ void loop() {
   logger->tick(currentTime);
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
-  state = lightSensor(true);
+  state = lightSensor(whichSensor); 
   
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
+  
+  resetState = readBtn(reset, resetState);
 
   //DEBUG\\
   
@@ -143,12 +146,12 @@ void loop() {
     }else{
       on = false;
     }
-    checkTimer();
+    //checkTimer();
     if(on){
       digitalWrite(motor, HIGH);
     }
   }
-  //If the variable on is false, trun the motor off. (!false = true)
+  //If the variable on is false, turn the motor off. (!false = true)
   if(!on){
     digitalWrite(motor, LOW);
   }

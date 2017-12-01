@@ -4,12 +4,12 @@ void parserinit() {
   Serial.println("C - Will clear the Timing data.");
 }
 void parser() {
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0 && false) {
     char c = toupper(Serial.read());
     if (c == 'T') {
-      writeTimer();
+      //writeTimer();
     } else if(c == 'C') {
-      clearTimer();
+      //clearTimer();
     }
   }
 }

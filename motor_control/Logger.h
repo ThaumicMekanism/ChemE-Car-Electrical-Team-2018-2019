@@ -6,21 +6,23 @@
 #include <SD.h>
 #include <SPI.h>
 #include "pins.h"
+#include "settings.h"
 
 class Logger {
     public:
         void tick(unsigned long t);
         void measure();
-        void checkTimer(unsigned long curT, bool resetState, bool onState);
+        void checkTimer(unsigned long curT);
         void newFile();
         void nextName();
         String fileName();
-        Logger();
+        Logger(bool *_onState, bool *_isActiveState, bool *_resetState, int *_sensorState);
         unsigned long measureThreshold = 100; // In milliseconds
     private:
         bool *onState;
         bool *isActiveState;
         bool *resetState;
+        int *sensorState;
         Adafruit_INA219 ina219;
         File currentFile;
         bool prevResetState = false;
@@ -30,10 +32,11 @@ class Logger {
         unsigned int curnameInt = 0;
         unsigned long prevT = 0;
 };
-Logger::Logger(bool *_onState, bool *_isActiveState, bool *_resetState) {
+Logger::Logger(bool *_onState, bool *_isActiveState, bool *_resetState, int *_sensorState) {
     onState = _onState;
     isActiveState = _isActiveState;
     resetState = _resetState;
+    sensorState = _sensorState;
     ina219.begin();
     SD.begin(chipselect);
     while (SD.exists(fileName())) {
@@ -46,11 +49,20 @@ Logger::Logger(bool *_onState, bool *_isActiveState, bool *_resetState) {
 }
 
 void Logger::tick(unsigned long t) {
-    checkTimer(t, );
-    
+    checkTimer(t);
+    if (measuring) {
+      measure();
+    }
 }
 
 void Logger::measure(){
+  if (logSensor) {
+    currentFile.print(*sensorState);
+    if (logVoltage) {
+      currentFile.print(F(","));
+    }
+  }
+  if (logVoltage) {
     float shuntvoltage = ina219.getShuntVoltage_mV();
     float busvoltage = ina219.getBusVoltage_V();
     float current_mA = ina219.getCurrent_mA();
@@ -61,16 +73,20 @@ void Logger::measure(){
     currentFile.print(F(","));
     currentFile.print(current_mA);
     currentFile.print(F(","));
-    currentFile.println(loadvoltage);
+    currentFile.print(loadvoltage);
+  }
+  if (logVoltage || logSensor) {
+    currentFile.println("");
+  }
 }
 
-void Logger::checkTimer(unsigned long curT, bool resetState, bool onState) {
-  if (isactiveState) {
+void Logger::checkTimer(unsigned long curT) {
+  if (*isActiveState) {
     if (measuring && curT - prevT > measureThreshold) {
       measure();
       prevT = curT;
     }
-    if (resetState && resetState != prevResetState) {
+    if (*resetState && *resetState != prevResetState) {
       measuring = !measuring;
       if (!measuring) {
         //save timer
@@ -80,10 +96,9 @@ void Logger::checkTimer(unsigned long curT, bool resetState, bool onState) {
         startingMeasurement = curT;
       }
     }
-    return measuring;
+    *onState = measuring;
   }
   prevResetState = resetState;
-  return onState;
 }
 
 void Logger::newFile() {

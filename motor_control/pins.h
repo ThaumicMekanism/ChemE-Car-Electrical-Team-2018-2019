@@ -1,3 +1,5 @@
+#ifndef pins_h
+#define pins_h
 /*These are the pins which the arduino uses. */
 
 #define digitalSensor 5 //Sensor Digital Pin (INPUT)
@@ -15,3 +17,6 @@
 //This makes the reset and other checking if false not work. 
 //The motor will be ON or OFF based off of the state of the sensor which we are checking for.
 #define chipselect 10
+
+
+#endif
