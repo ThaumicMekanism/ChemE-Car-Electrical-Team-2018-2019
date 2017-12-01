@@ -3,4 +3,14 @@
  * 
  * NOTE: Set controlledVoltage to true if setting motors PWM from here so that it does not get reset during the motor state part of the function.
  */
- 
+unsigned int VCpwmVal;
+ void setMotorPWM() {
+  if (useVoltageControl) {
+    
+  }
+ }
+
+void CheckVal() {
+  
+}
+

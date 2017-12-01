@@ -140,6 +140,7 @@ void loop() {
       on = false;
     }
     //checkTimer();
+    VCsetMotorPWM();
     if(on && !controlledVoltage){
       digitalWrite(motor, HIGH);
     }

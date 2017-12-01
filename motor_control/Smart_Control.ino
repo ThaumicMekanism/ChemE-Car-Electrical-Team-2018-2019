@@ -5,6 +5,9 @@ void smartfn() {
       digitalWrite(motor, HIGH);
       on = true;
     }
+    if (on) {
+      VCsetMotorPWM();
+    }
   
     //Counts the number of loops
     loops++;
