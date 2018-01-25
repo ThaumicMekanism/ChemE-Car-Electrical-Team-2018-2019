@@ -50,9 +50,6 @@ Logger::Logger(bool *_onState, bool *_isActiveState, bool *_resetState, int *_se
 
 void Logger::tick(unsigned long t) {
     checkTimer(t);
-    if (measuring) {
-      measure();
-    }
 }
 
 void Logger::measure(){
