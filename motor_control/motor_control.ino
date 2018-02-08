@@ -68,10 +68,11 @@ void setup() {
   }
   
   //Debug Channel Init (Initiates regardless of if it is called or not later.)
-  Serial.begin(115200);
+  Serial.begin(channel);
 
   blinkled = new BlinkLed();
   logger = new Logger(&on, &smart_switch, &resetState, &state);
+  VCinit();
 
   //Lights led since the board should be ready and is now looping.
   if(debug_board_ready){
@@ -102,6 +103,7 @@ void loop() {
   //Some classes 'tick' where they update values with all fns running instead of having their own for loops and halting the code.
   blinkled->tick(currentTime);
   logger->tick(currentTime);
+  VCCheckVoltage();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
   state = lightSensor(whichSensor); 
@@ -139,7 +141,6 @@ void loop() {
     }else{
       on = false;
     }
-    //checkTimer();
     VCsetMotorPWM();
     if(on && !controlledVoltage){
       digitalWrite(motor, HIGH);

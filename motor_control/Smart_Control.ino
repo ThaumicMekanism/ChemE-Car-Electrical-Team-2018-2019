@@ -2,7 +2,9 @@ void smartfn() {
   //Resets light
     if(readBtn(reset, LOW) == HIGH and allow_button == true){
       //Turns motor back on and resets 'on' back to true (running)
-      digitalWrite(motor, HIGH);
+      if (!controlledVoltage) {
+        digitalWrite(motor, HIGH);
+      }
       on = true;
     }
     if (on) {
