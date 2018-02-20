@@ -1,3 +1,5 @@
+#ifndef debug_h
+#define debug_h
 /* These variables are for debug purposes, for the command line outputs. */
 
 //Prints the value of the 'state' variable.
@@ -10,3 +12,5 @@
 #define debug_board_ready true
 //Allows the board_error pin to activate (turn on the led)
 #define debug_board_error false
+
+#endif
