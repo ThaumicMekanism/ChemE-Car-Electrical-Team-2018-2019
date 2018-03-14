@@ -30,7 +30,6 @@ bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
 bool resetState = false;
-bool controlledVoltage = false;
 BlinkLed* blinkled;
 Logger* logger;
 
@@ -57,7 +56,7 @@ void setup() {
 
   //Turns the motor on if the variable on is true.
   if(on == true){
-    digitalWrite(motor, HIGH);
+    motorOn();
   }
 
   
@@ -141,15 +140,10 @@ void loop() {
     }else{
       on = false;
     }
-    VCsetMotorPWM();
-    if(on && !controlledVoltage){
-      digitalWrite(motor, HIGH);
-    }
+    motorOn();
   }
   //If the variable on is false, turn the motor off. (!false = true)
-  if(!on){
-    digitalWrite(motor, LOW);
-  }
+  motorOff();
   //time = micros() - time;
   //Serial.println(time, DEC);
 }
