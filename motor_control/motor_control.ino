@@ -45,7 +45,7 @@ void setup() {
   pinMode(digitalSensor, INPUT);
   pinMode(analogSensor, INPUT);
   pinMode(motor, OUTPUT);
-  pinMode(reset, INPUT);
+  pinMode(resetb, INPUT);
   pinMode(board_ready, OUTPUT);
   pinMode(smart_control_switch, INPUT);
   //pinMode(decrease_buffer_switch, INPUT);
@@ -110,7 +110,7 @@ void loop() {
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
   
-  resetState = readBtn(reset, resetState);
+  resetState = readBtn(resetb, resetState);
 
   //DEBUG\\
   
@@ -127,13 +127,16 @@ void loop() {
   
   if(smart_control){
     smartfn();
-  }else{
+  }else {
     if (smart_switch_prev != smart_switch) {
       if (smart_switch) {
         blinkled->add(board_ready, 250, -1, 0);
       } else {
         blinkled->rem(board_ready, HIGH);
       }
+    }
+    if (smart_switch) {
+        state = true;
     }
     if(state == check){
       on = true;
@@ -151,7 +154,8 @@ void loop() {
 bool readBtn(int pin, bool prev) {
   if (currentTime - button_timeout > 100) {
     button_timeout = currentTime;
-    return digitalRead(reset);
+    bool st = digitalRead(pin);
+    return st;
   } else {
     return prev;
   }
