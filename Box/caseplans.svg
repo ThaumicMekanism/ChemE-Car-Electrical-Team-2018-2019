@@ -3,7 +3,10 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 855.2 645.4" style="enable-background:new 0 0 855.2 645.4;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#FF0000;stroke-width:1.000000e-03;}
+	.st0{fill:none;stroke:#FF0000;stroke-width:7.200000e-02;}
+	.st1{opacity:0.97;}
+	.st2{font-family:'MyriadPro-Regular';}
+	.st3{font-size:12px;}
 </style>
 <g transform="translate(22.5000185, 22.5000185) ">
 	<polygon class="st0" points="-4.5,-4.5 45.4,-4.5 45.4,4 95.3,4 95.3,-4.5 145.2,-4.5 145.2,4 195.1,4 195.1,-4.5 244.9,-4.5 
@@ -54,4 +57,22 @@
 <circle class="st0" cx="645.6" cy="350.2" r="18.4"/>
 <circle class="st0" cx="703.4" cy="350.2" r="18.4"/>
 <circle class="st0" cx="763.2" cy="350.2" r="18.4"/>
+<image style="overflow:visible;" width="1600" height="1600" xlink:href="engine.png"  transform="matrix(2.146289e-02 0 0 2.146289e-02 628.4297 372.2437)">
+</image>
+<image style="overflow:visible;" width="938" height="938" xlink:href="battery.png"  transform="matrix(6.044021e-02 0 0 6.044021e-02 705.6147 131.2223)">
+</image>
+<image style="overflow:visible;" width="938" height="938" xlink:href="battery.png"  transform="matrix(5.137417e-02 0 0 5.137417e-02 709.8667 135.4742)">
+</image>
+<image style="overflow:visible;" width="150" height="151" xlink:href="arduino.jpg"  transform="matrix(0.2835 0 0 0.2835 567.6402 380.1588)">
+</image>
+<image style="overflow:visible;" width="417" height="375" xlink:href="analogue digital.png"  transform="matrix(0.102 0 0 0.102 682.1402 382.4418)">
+</image>
+<text transform="matrix(1 0 0 1 685.8333 384.0496)" class="st1 st2 st3">Digital</text>
+<text transform="matrix(1 0 0 1 684.3333 423.4354)" class="st2 st3">Analog</text>
+<image style="overflow:visible;" width="512" height="512" xlink:href="brain.png"  transform="matrix(8.304626e-02 0 0 8.304626e-02 741.9402 378.302)">
+</image>
+<image style="overflow:visible;" width="1600" height="1600" xlink:href="info.png"  transform="matrix(1.771654e-02 0 0 1.771654e-02 157.8268 91.5538)">
+</image>
+<image style="overflow:visible;" width="1600" height="1600" xlink:href="engine.png"  transform="matrix(1.771654e-02 0 0 1.771654e-02 190.5268 91.5538)">
+</image>
 </svg>
