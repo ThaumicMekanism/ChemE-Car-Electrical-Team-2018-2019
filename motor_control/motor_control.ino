@@ -105,7 +105,8 @@ void loop() {
   VCCheckVoltage();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
-  state = lightSensor(whichSensor); 
+  state = lightSensor(digitalRead(adLightSwitch)); 
+  //state = lightSensor(whichSensor); 
   
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
