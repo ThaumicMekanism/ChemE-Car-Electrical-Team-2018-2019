@@ -30,7 +30,6 @@ bool smart_switch = false;
 bool smart_switch_prev = false;
 unsigned long button_timeout = 0;
 bool resetState = false;
-bool controlledVoltage = false;
 BlinkLed* blinkled;
 Logger* logger;
 
@@ -46,7 +45,7 @@ void setup() {
   pinMode(digitalSensor, INPUT);
   pinMode(analogSensor, INPUT);
   pinMode(motor, OUTPUT);
-  pinMode(reset, INPUT);
+  pinMode(resetb, INPUT);
   pinMode(board_ready, OUTPUT);
   pinMode(smart_control_switch, INPUT);
   //pinMode(decrease_buffer_switch, INPUT);
@@ -57,7 +56,7 @@ void setup() {
 
   //Turns the motor on if the variable on is true.
   if(on == true){
-    digitalWrite(motor, HIGH);
+    motorOn();
   }
 
   
@@ -106,12 +105,13 @@ void loop() {
   VCCheckVoltage();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
-  state = lightSensor(whichSensor); 
+  state = lightSensor(digitalRead(adLightSwitch)); 
+  //state = lightSensor(whichSensor); 
   
   smart_switch_prev = smart_switch;
   smart_switch = digitalRead(smart_control_switch);
   
-  resetState = readBtn(reset, resetState);
+  resetState = readBtn(resetb, resetState);
 
   //DEBUG\\
   
@@ -128,7 +128,7 @@ void loop() {
   
   if(smart_control){
     smartfn();
-  }else{
+  }else {
     if (smart_switch_prev != smart_switch) {
       if (smart_switch) {
         blinkled->add(board_ready, 250, -1, 0);
@@ -136,20 +136,18 @@ void loop() {
         blinkled->rem(board_ready, HIGH);
       }
     }
+    if (smart_switch) {
+        state = true;
+    }
     if(state == check){
       on = true;
     }else{
       on = false;
     }
-    VCsetMotorPWM();
-    if(on && !controlledVoltage){
-      digitalWrite(motor, HIGH);
-    }
+    motorOn();
   }
   //If the variable on is false, turn the motor off. (!false = true)
-  if(!on){
-    digitalWrite(motor, LOW);
-  }
+  motorOff();
   //time = micros() - time;
   //Serial.println(time, DEC);
 }
@@ -157,7 +155,8 @@ void loop() {
 bool readBtn(int pin, bool prev) {
   if (currentTime - button_timeout > 100) {
     button_timeout = currentTime;
-    return digitalRead(reset);
+    bool st = digitalRead(pin);
+    return st;
   } else {
     return prev;
   }

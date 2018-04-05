@@ -1,15 +1,11 @@
 void smartfn() {
   //Resets light
-    if(readBtn(reset, LOW) == HIGH and allow_button == true){
+   bool resSt = digitalRead(2);
+    if(resSt && allow_button){
       //Turns motor back on and resets 'on' back to true (running)
-      if (!controlledVoltage) {
-        digitalWrite(motor, HIGH);
-      }
       on = true;
     }
-    if (on) {
-      VCsetMotorPWM();
-    }
+    motorOn();
   
     //Counts the number of loops
     loops++;

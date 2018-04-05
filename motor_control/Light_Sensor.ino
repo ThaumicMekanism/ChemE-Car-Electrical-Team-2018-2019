@@ -1,5 +1,5 @@
-bool lightSensor(bool analog) {
-  if (analog) { //If we are reading the analog values do this.
+bool lightSensor(bool digital) {
+  if (!digital) { //If we are reading the analog values do this.
     //Serial.println(analogRead(analogSensor));
     if (analogRead(analogSensor) > 0) {
       return true;
