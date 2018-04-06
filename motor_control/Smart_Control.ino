@@ -1,11 +1,10 @@
 void smartfn() {
   //Resets light
-   bool resSt = digitalRead(2);
-    if(resSt && allow_button){
+    if(digitalRead(resetb) && allow_button){
       //Turns motor back on and resets 'on' back to true (running)
       on = true;
     }
-    motorOn();
+    //motorOn();
   
     //Counts the number of loops
     loops++;

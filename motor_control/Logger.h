@@ -78,7 +78,7 @@ void Logger::measure(){
 }
 
 void Logger::checkTimer(unsigned long curT) {
-  if (*isActiveState) {
+  if (!*isActiveState) {
     if (measuring && curT - prevT > measureThreshold) {
       measure();
       prevT = curT;

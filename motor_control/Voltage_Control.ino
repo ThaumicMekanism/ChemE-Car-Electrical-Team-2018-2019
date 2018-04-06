@@ -17,9 +17,11 @@ float movingAverageSum;
 #define analogPin 
 
 void VCinit() {
+  #warning "Need to set analogRead to the correct reading."
+  return;
   VCina219.begin();
   // Pre-load MMA
-  #warning "Need to set analogRead to the correct reading."
+  
 //  for (int x=0; x < averageCount; x++)
 //    
 //    //movingAverageSum = movingAverageSum + analogRead(analogPin);
@@ -28,19 +30,15 @@ void VCinit() {
 //   movingAverage = movingAverageSum / averageCount;
 }
 
-void motorOn() {
+
+void setMotor() {
     if(on){
         if (useVoltageControl) {
             VCsetMotorPWM();
         } else {
             digitalWrite(motor, HIGH);
         }
-    }
-    
-}
-
-void motorOff() {
-    if(!on){
+    } else {
         digitalWrite(motor, LOW);
       }
 }

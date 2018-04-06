@@ -55,9 +55,9 @@ void setup() {
   //END PinMode Setup\\
 
   //Turns the motor on if the variable on is true.
-  if(on == true){
-    motorOn();
-  }
+//  if(on == true){
+//    motorOn();
+//  }
 
   
 
@@ -144,10 +144,11 @@ void loop() {
     }else{
       on = false;
     }
-    motorOn();
+    //motorOn();
   }
   //If the variable on is false, turn the motor off. (!false = true)
-  motorOff();
+  //motorOff();
+  setMotor();
   //time = micros() - time;
   //Serial.println(time, DEC);
 }
