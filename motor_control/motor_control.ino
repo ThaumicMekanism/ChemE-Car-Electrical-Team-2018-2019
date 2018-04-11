@@ -101,7 +101,7 @@ void loop() {
 
   //Some classes 'tick' where they update values with all fns running instead of having their own for loops and halting the code.
   blinkled->tick(currentTime);
-  logger->tick(currentTime);
+  //logger->tick(currentTime);
   VCCheckVoltage();
   
   //Gets the state of the sensor pin (HIGH(1)/LOW(0))
