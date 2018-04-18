@@ -102,6 +102,8 @@ What this mode does:
 The motor will turn on and off based off of the state of the control input DIRECTLY.
 
 
+You will know that this mode is activated on start because the board on LED will stay steadly on unlike the smart control mode.
+
 -----------------------------
 |1.b.iii) Smart Control Mode|
 -----------------------------
@@ -112,12 +114,14 @@ To enable this mode, you need to make sure the Smart Control Switch is turned ON
 What this mode does:
 This mode runs the smart control function to control the motor instead of directly controlling the motor. More can be found about this in the [Features -> Smart Control] section of the documentation.
 
+You will know that this mode is activated on start because the board on LED will blink for a few seconds on boot.
 
 -------------------------
 |1.b.iv) Always Run Mode|
 -------------------------
 
-
+How to enable:
+First, enter into 'Normal Mode' (see how to do this above). After you have entered 'Normal Mode', turn the Smart Control Switch to ON. To return to the 'Normal Control Mode', just turn the Smart Control Switch to OFF.
 
 
 
