@@ -16,10 +16,11 @@
         v.      Logger
     b. Usage (modes)
     	i.		General Information
-    	ii.		Smart Control Mode
-    	iii.	Always Run Mode
-    	iv.		Logger Mode
-    	v. 		Voltage Controller Mode
+    	ii.		Normal Mode
+    	iii.	Smart Control Mode
+    	iv.		Always Run Mode
+    	v.		Logger Mode
+    	vi. 	Voltage Controller Mode
 2. Functions (Litterally what the functions in the program do. This goes in more detail than the features.)
 3. Settings
 4. Updates
@@ -81,6 +82,41 @@ This utilizes the same components as the Voltage Controller plus an SD card read
 ++++++++++++
 |1.b) Usage|
 ++++++++++++
+
+
+----------------------------
+|1.b.i) General Information|
+----------------------------
+
+To turn on the box, you will press the button which connects the 9v battery to the arduino. If you want the power from the battery to flow to the motor, you need to make sure you have the motor button pressed. If this is not pressed, the motor WILL NOT RUN regardless of if the arduino tells it to. The next button currently is set to telling the board if it should read the digital or analog control input. A change to the buttons state will instantly be reflected by the control system. The last button is dubbed the 'Smart Control Button' this button enables 'Normal Mode', 'Smart Control Mode', 'Always Run Mode', and the 'Logger Mode'. More about how you can switch between the different modes can be found below.
+
+
+---------------------
+|1.b.ii) Normal Mode|
+---------------------
+
+How to enable:
+To enable this mode, you need to make sure that the Smart Control Switch is turned OFF when the board starts up. This is ONLY checked on the startup loop. If you want to switch to the 'Smart Control Mode', you will have to turn off the arduino and then start it up with the correct buttons pressed. 
+
+What this mode does:
+The motor will turn on and off based off of the state of the control input DIRECTLY.
+
+
+-----------------------------
+|1.b.iii) Smart Control Mode|
+-----------------------------
+
+How to enable:
+To enable this mode, you need to make sure the Smart Control Switch is turned ON when the board starts up. This is ONLY checked on the startup of the loop. I you want to switch back to 'Normal Mode', you will have to turn off the arduino and then with the correct buttons pressed.
+
+What this mode does:
+This mode runs the smart control function to control the motor instead of directly controlling the motor. More can be found about this in the [Features -> Smart Control] section of the documentation.
+
+
+-------------------------
+|1.b.iv) Always Run Mode|
+-------------------------
+
 
 
 
