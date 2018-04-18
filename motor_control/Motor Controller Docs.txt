@@ -31,6 +31,7 @@ This program is meant to run on an arduino uno or some board with the same pinou
 
 Currently there are a total of 2 control inputs. One is digital and the other is analog. 
 
-1. Digital Input: The digital control input is just as it sounds, it will accepts an on or off signal from the control team and will be processed as need depending on what we set on and off to be. The voltage range that the digital light sensor has is 0V-5V. Voltages higher or lower than this CAN damage the board.
+1. Digital Input: 
+The digital control input is just as it sounds, it will accepts an on or off signal from the control team and will be processed as need depending on what we set on and off to be. The accepted voltage range for the digital input on the arduino is 0V-5V. Voltages higher or lower than this CAN damage the board. In our current place, we are using a digital light sensor which emmits on if the motor should be on and off if the motor should be off. Other digital devices which function similarly will also work just as well.
 
 2. Analog Input: 
