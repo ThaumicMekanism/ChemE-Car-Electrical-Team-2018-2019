@@ -9,8 +9,11 @@
 =======
 1. Overview
     a. Features
-        i.  Currently Implemented Control Inputs
-        ii. Smart Control
+        i.      Currently Implemented Control Inputs
+        ii.     Smart Control
+        iii.    Blink Led
+        iv.     Voltage Controller
+        v.      Logger
     b. Usage
 2. Functions (Litterally what the functions in the program do. This goes in more detail than the features.)
 3. Settings
@@ -35,3 +38,11 @@ Currently there are a total of 2 control inputs. One is digital and the other is
 The digital control input is just as it sounds, it will accepts an on or off signal from the control team and will be processed as need depending on what we set on and off to be. The accepted voltage range for the digital input on the arduino is 0V-5V. Voltages higher or lower than this CAN damage the board. In our current place, we are using a digital light sensor which emmits on if the motor should be on and off if the motor should be off. Other digital devices which function similarly will also work just as well.
 
 2. Analog Input: 
+The analog input will accept any voltage between 0V and 5V. Any voltage out of this range CAN damage the board. The analog input is different than the digital input because it reades the voltage in comparison to the reference voltage. This produces a range of 1024 values from 0 to 1023. The current state of the program just has it so if the number read by the analog in is greater than 0, then the motor should be on. If it is equal to 0, the motor should be off. This is not optimal because noise can give false positives which could be problematic. Our current setup which uses this system uses a light sensor which is connected through a voltage divider to the analog pin to read the value of the light sensor.
+
+
+-----------------------
+|1.a.ii) Smart Control|
+-----------------------
+
+This is a feature 
