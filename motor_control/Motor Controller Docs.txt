@@ -14,7 +14,12 @@
         iii.    Blink Led
         iv.     Voltage Controller
         v.      Logger
-    b. Usage
+    b. Usage (modes)
+    	i.		General Information
+    	ii.		Smart Control Mode
+    	iii.	Always Run Mode
+    	iv.		Logger Mode
+    	v. 		Voltage Controller Mode
 2. Functions (Litterally what the functions in the program do. This goes in more detail than the features.)
 3. Settings
 4. Updates
@@ -23,11 +28,14 @@
 =============
 |1) Overview|
 =============
+
 This program is meant to run on an arduino uno or some board with the same pinout/interface. The purpose of this program is to detect some chemical timer to allow a motor to run when the chemical timer tells it to. It controlls the power to the motor through a transistor. The transistor connects the positive from the batter to the motor positive and will only supply power when the board sends a high signal to the board. 
+
 
 +++++++++++++++
 |1.a) Features|
 +++++++++++++++
+
 
 ---------------------------------------------
 |1.a.i) Currently Implemented Control Inputs|
@@ -56,6 +64,23 @@ This is a feature I created if we had a reaction which we just wanted to time to
 This feature allows for us to set the output of some pins to on and off for some time. In short, it allows us to cause an LED to blink WITHOUT having the program halt to blink it. It uses a timer and has the ability to control the number of blinks it makes (or can go until a function stops it). You can adjust the length of time the LED is on and off for as well.
 
 
+-------------------------
+|1.a.iv) Voltage Control|
+-------------------------
+
+This feature is currently in development. It is not FULLY implemented yet. Eventually it will read in the voltage and amperage that the battery is giving to the motor and then set the PWM to the transistor to decrease the voltage given to the motor effectively controlling the speed of the motor. More will be said about this once it is implemented.
+
+
+---------------
+|1.a.v) Logger|
+---------------
+
+This utilizes the same components as the Voltage Controller plus an SD card read/writer. It will read the voltage and amperage from the battery and print that data to a file on the sd card. I would also like for it to display distance but who know how that will go.
+
+
+++++++++++++
+|1.b) Usage|
+++++++++++++
 
 
 
