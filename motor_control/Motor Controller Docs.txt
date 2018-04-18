@@ -18,6 +18,7 @@
 2. Functions (Litterally what the functions in the program do. This goes in more detail than the features.)
 3. Settings
 4. Updates
+5. License
 
 =============
 |1) Overview|
@@ -45,4 +46,16 @@ The analog input will accept any voltage between 0V and 5V. Any voltage out of t
 |1.a.ii) Smart Control|
 -----------------------
 
-This is a feature 
+This is a feature I created if we had a reaction which we just wanted to time to get to a specific state and would return to its initial state after a little bit of time. This feature waits for a 'reset' button to be pressed to initially turn on the motor. It then samples the control input's value over every iteration, if the state is what we want, it increments a counter. After a set amount of time which we set, it will compare the number of loops vs the number of times the control input was not at the state which we want (which designates if the motor should turn on). If this number is greater than the threshold (currently set to half the total number of checks in that interval), it will set the motor state to off and will NOT turn the motor on until the reset button is pressed again REGARDLESS of the buttons' state. This is a great feature if you know that the stop condition which you want will last for a little bit of time but not long enough for your needs.
+
+
+
+
+
+
+
+============
+|5) License|
+============
+
+Currently this project is under the Apache License v2.0. More info can be found in the LICENSE.md file in the root of this repository.
