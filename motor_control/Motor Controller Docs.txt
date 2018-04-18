@@ -49,6 +49,12 @@ The analog input will accept any voltage between 0V and 5V. Any voltage out of t
 This is a feature I created if we had a reaction which we just wanted to time to get to a specific state and would return to its initial state after a little bit of time. This feature waits for a 'reset' button to be pressed to initially turn on the motor. It then samples the control input's value over every iteration, if the state is what we want, it increments a counter. After a set amount of time which we set, it will compare the number of loops vs the number of times the control input was not at the state which we want (which designates if the motor should turn on). If this number is greater than the threshold (currently set to half the total number of checks in that interval), it will set the motor state to off and will NOT turn the motor on until the reset button is pressed again REGARDLESS of the buttons' state. This is a great feature if you know that the stop condition which you want will last for a little bit of time but not long enough for your needs.
 
 
+--------------------
+|1.a.iii) Blink Led|
+--------------------
+
+This feature allows for us to set the output of some pins to on and off for some time. In short, it allows us to cause an LED to blink WITHOUT having the program halt to blink it. It uses a timer and has the ability to control the number of blinks it makes (or can go until a function stops it). You can adjust the length of time the LED is on and off for as well.
+
 
 
 
