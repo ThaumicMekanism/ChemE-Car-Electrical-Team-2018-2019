@@ -1,0 +1,36 @@
+/////////////////////////////////////////////////////////
+///////////////ChemE Car Motor Controller////////////////
+/////////////////////////////////////////////////////////
+//Created by Stephan K for the ChemE Car Team 2017-2018//
+/////////////////////////////////////////////////////////
+
+=======
+|Index|
+=======
+1. Overview
+    a. Features
+        i.  Currently Implemented Control Inputs
+        ii. Smart Control
+    b. Usage
+2. Functions (Litterally what the functions in the program do. This goes in more detail than the features.)
+3. Settings
+4. Updates
+
+=============
+|1) Overview|
+=============
+This program is meant to run on an arduino uno or some board with the same pinout/interface. The purpose of this program is to detect some chemical timer to allow a motor to run when the chemical timer tells it to. It controlls the power to the motor through a transistor. The transistor connects the positive from the batter to the motor positive and will only supply power when the board sends a high signal to the board. 
+
++++++++++++++++
+|1.a) Features|
++++++++++++++++
+
+---------------------------------------------
+|1.a.i) Currently Implemented Control Inputs|
+---------------------------------------------
+
+Currently there are a total of 2 control inputs. One is digital and the other is analog. 
+
+1. Digital Input: The digital control input is just as it sounds, it will accepts an on or off signal from the control team and will be processed as need depending on what we set on and off to be. The voltage range that the digital light sensor has is 0V-5V. Voltages higher or lower than this CAN damage the board.
+
+2. Analog Input: 
