@@ -3,3 +3,4 @@ Future Plans:
 1) Implement the Voltage Controller
 2) Create board design with Eagle
 	a) Switch to using an arduino nano
+    b) Print it with this site: https://oshpark.com/
