@@ -55,8 +55,12 @@ void Logger::tick(unsigned long t) {
 void Logger::measure(){
   if (logSensor) {
     currentFile.print(*sensorState);
+    
+    Serial.print(*sensorState);
     if (logVoltage) {
       currentFile.print(F(","));
+      
+      Serial.print(F(","));
     }
   }
   if (logVoltage) {
@@ -71,9 +75,18 @@ void Logger::measure(){
     currentFile.print(current_mA);
     currentFile.print(F(","));
     currentFile.print(loadvoltage);
+
+    Serial.print(shuntvoltage);
+    Serial.print(F(","));
+    Serial.print(busvoltage);
+    Serial.print(F(","));
+    Serial.print(current_mA);
+    Serial.print(F(","));
+    Serial.print(loadvoltage);
   }
   if (logVoltage || logSensor) {
     currentFile.println("");
+    Serial.println("");
   }
 }
 
@@ -89,20 +102,25 @@ void Logger::checkTimer(unsigned long curT) {
         //save timer
         currentFile.print("Total Time (in milliseconds): ");
         currentFile.println(curT - startingMeasurement);
+        Serial.print("Total Time (in milliseconds): ");
+        Serial.println(curT - startingMeasurement);
       } else {
         startingMeasurement = curT;
       }
     }
     *onState = measuring;
   }
-  prevResetState = resetState;
+  prevResetState = *resetState;
 }
 
 void Logger::newFile() {
     if (currentFile) {
         currentFile.close();
+        Serial.print(fileName());
+        Serial.println(" has been closed.");
     }
     nextName();
+    Serial.println(fileName());
     currentFile = SD.open(fileName(), FILE_WRITE);
 }
 
