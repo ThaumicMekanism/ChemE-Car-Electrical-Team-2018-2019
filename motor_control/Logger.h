@@ -104,6 +104,7 @@ void Logger::checkTimer(unsigned long curT) {
         currentFile.println(curT - startingMeasurement);
         Serial.print("Total Time (in milliseconds): ");
         Serial.println(curT - startingMeasurement);
+        this->newFile();
       } else {
         startingMeasurement = curT;
       }
@@ -114,14 +115,16 @@ void Logger::checkTimer(unsigned long curT) {
 }
 
 void Logger::newFile() {
-    if (currentFile) {
+    if (currentFile != NULL) {
         currentFile.close();
         Serial.print(fileName());
         Serial.println(" has been closed.");
     }
     nextName();
-    Serial.println(fileName());
-    currentFile = SD.open(fileName(), FILE_WRITE);
+    String fn = fileName();
+    currentFile = SD.open(fn, FILE_WRITE);
+    Serial.println(fn);
+    Serial.println(currentFile);
 }
 
 void Logger::nextName() {
@@ -134,9 +137,9 @@ void Logger::nextName() {
 }
 
 String Logger::fileName() {
-    String s = "ChemEdata-" + basenameInt;
+      String s = "ChemEdata-" + String(basenameInt);
     s += "-";
-    s += curnameInt;
+    s += String(curnameInt);
     s += ".csv";
     return s;
 }
